@@ -1,0 +1,59 @@
+body {
+  font: normal 0.8em Arial, sans-serif;
+}
+h1 {
+  display: none;
+}
+h2 {
+  font: bold 1.2em Arial, sans-serif;
+  text-align: center;
+}
+input {
+  display: none;
+}
+table {
+  border: 1px solid #cdc5b6;
+  border-collapse: collapse;
+}
+th {
+  border: 1px solid #cdc5b6;
+  padding: 0 4px;
+}
+td {
+  border: 1px solid #cdc5b6;
+  text-align: right;
+  padding: 0 4px;
+}
+td.button-cell, th.button-cell {
+  display: none;
+}
+
+p.c {
+  font: 0.75em Arial, Helvetica, sans-serif;
+  text-align: center;
+}
+span.scrn {
+  display: none;
+}
+td.img {
+  display: none;
+}
+
+div#params {
+  text-align: center;
+}
+div#comments {
+  display: none;
+}
+form#period {
+  display: none;
+}
+th#edit {
+  display: none;
+}
+tr#kokku {
+  font-weight: bold;
+}
+tr#fill {
+  display: none;
+}

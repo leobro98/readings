@@ -1,0 +1,138 @@
+body {
+  background: #fdf5e6;
+  font: normal 0.8em Arial, sans-serif;
+}
+h1 {
+  font: bold 1.5em Arial, sans-serif;
+  text-align: center;
+}
+h2 {
+  font: bold 1.2em Arial, sans-serif;
+  text-align: center;
+}
+img {
+  display: block;
+  /*margin-left: auto;
+  margin-right: auto;*/
+  float: right;
+  border: none;
+}
+strong {
+  color: red;
+}
+th {
+  border: 1px solid #cdc5b6;
+}
+td {
+  text-align: right;
+  min-height: 16px;
+}
+
+.warn {
+  color: red;
+  font-weight: bold;
+}
+
+div.left {
+  float: left;
+  width: 50%;
+}
+div.right {
+  float: left;
+}
+div.cont {
+  width: 100%;
+}
+div.space-top {
+  margin-top: 6em;
+}
+input.long {
+  width: 12em;
+}
+p.c {
+  font: 0.75em Arial, Helvetica, sans-serif;
+  text-align: center;
+}
+td.img img {
+  cursor: pointer;
+}
+td.button-cell, th.button-cell {
+  border-style: none;
+  background-color: #fdf5e6;
+}
+tr.dark {
+  background-color: #ede5d6;
+}
+tr.highlighted {
+  background-color: #ffddcc;
+}
+td.button-cell img {
+  visibility: hidden;
+  cursor: pointer;
+  margin-right: 10%;
+}
+tr.highlighted  img{
+  visibility: visible;
+}
+tr.highlighted  .button-cell{
+  background-color: #ffddcc;
+}
+
+input[type="text"] {
+  width: 4em;
+  text-align: right;
+}
+
+input.riser {
+  width: 4em;
+}
+
+div#params, div#buttons {
+  text-align: center;
+}
+div#comments {
+  margin-left: auto;
+  margin-right: auto;
+  width: 52em;
+}
+tr#kokku {
+  font-weight: bold;
+}
+
+table.php td {
+  padding: 0 4px;
+}
+table#ky td {
+  text-align: left;
+  padding: 2px 7px;
+  border: 1px solid #cdc5b6;
+}
+table#period td, table#period  th {
+  padding: 2px 7px;
+}
+th#edit {
+  border-style: none;
+  width: 40px;
+}
+div#params input[type="text"] {
+  width: 3.5em;
+  text-align: right;
+}
+
+#message-box-outer {
+    text-align: center;
+}
+#message-box-inner {
+    width: 300px;
+    margin: 40px auto 20px auto;
+    padding: 10px;
+    border: 1px solid #cdc5b6;
+}
+#message-label {
+    height: 15px;
+    margin: auto 10px;
+    white-space: nowrap;
+}
+#message-button {
+    white-space: nowrap;
+}
