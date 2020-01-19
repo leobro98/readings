@@ -23,20 +23,6 @@ USE `readings`;
 -- --------------------------------------------------------
 
 --
--- Table structure for table `HouseReading`
---
-
-CREATE TABLE IF NOT EXISTS `HouseReading` (
-  `KyCode` varchar(10) NOT NULL,
-  `PeriodId` int(11) NOT NULL,
-  `Start` decimal(7,2) NOT NULL,
-  `End` decimal(7,2) NOT NULL,
-  UNIQUE KEY `UX_KyPeriod` (`KyCode`,`PeriodId`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `KY`
 --
 
@@ -54,7 +40,7 @@ CREATE TABLE IF NOT EXISTS `KY` (
   `People` tinyint(1) NOT NULL DEFAULT '0',
   `Risers` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`KyCode`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=INNODB DEFAULT CHARACTER SET=latin1;
 
 -- --------------------------------------------------------
 
@@ -70,8 +56,28 @@ CREATE TABLE IF NOT EXISTS `Period` (
   `Locked` tinyint(1) NOT NULL DEFAULT '0',
   `Finished` tinyint(1) NOT NULL DEFAULT '0' COMMENT 'User reports that all readings are entered',
   PRIMARY KEY (`PeriodId`),
-  UNIQUE KEY `UX_Period` (`KyCode`,`Year`,`Month`)
-) ENGINE=MyISAM AUTO_INCREMENT=1239 DEFAULT CHARSET=latin1;
+  UNIQUE KEY `UX_Period` (`KyCode`,`Year`,`Month`),
+  CONSTRAINT `FK_Period_KY` FOREIGN KEY (`KyCode`)
+    REFERENCES `KY` (`KyCode`)
+) ENGINE=INNODB DEFAULT CHARACTER SET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `HouseReading`
+--
+
+CREATE TABLE IF NOT EXISTS `HouseReading` (
+  `KyCode` varchar(10) NOT NULL,
+  `PeriodId` int(11) NOT NULL,
+  `Start` decimal(7,2) NOT NULL,
+  `End` decimal(7,2) NOT NULL,
+  UNIQUE KEY `UX_KyPeriod` (`KyCode`,`PeriodId`),
+  CONSTRAINT `FK_HouseReading_KY` FOREIGN KEY (`KyCode`)
+    REFERENCES `KY` (`KyCode`),
+  CONSTRAINT `FK_HouseReading_Period` FOREIGN KEY (`PeriodId`)
+    REFERENCES `Period` (`PeriodId`)
+) ENGINE=INNODB DEFAULT CHARACTER SET=latin1;
 
 -- --------------------------------------------------------
 
@@ -95,8 +101,10 @@ CREATE TABLE IF NOT EXISTS `Reading` (
   `ElectrStart` decimal(7,2) DEFAULT NULL,
   `ElectrEnd` decimal(7,2) DEFAULT NULL,
   `People` int(11) DEFAULT NULL,
-  UNIQUE KEY `UX_PeriodKorter` (`PeriodId`,`FlatId`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+  UNIQUE KEY `UX_PeriodFlat` (`PeriodId`,`FlatId`),
+  CONSTRAINT `FK_Reading_Period` FOREIGN KEY (`PeriodId`)
+    REFERENCES `Period` (`PeriodId`)
+) ENGINE=INNODB DEFAULT CHARACTER SET=latin1;
 
 -- --------------------------------------------------------
 
@@ -108,8 +116,10 @@ CREATE TABLE IF NOT EXISTS `Riser` (
   `RiserId` int(11) NOT NULL,
   `KyCode` varchar(10) NOT NULL,
   `Name` varchar(50) NOT NULL,
-  PRIMARY KEY (`RiserId`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+  PRIMARY KEY (`RiserId`),
+  CONSTRAINT `FK_Riser_KY` FOREIGN KEY (`KyCode`)
+    REFERENCES `KY` (`KyCode`)
+) ENGINE=INNODB DEFAULT CHARACTER SET=latin1;
 
 -- --------------------------------------------------------
 
@@ -122,8 +132,10 @@ CREATE TABLE IF NOT EXISTS `RiserReading` (
   `RiserId` int(11) NOT NULL,
   `Start` decimal(7,2) NOT NULL,
   `End` decimal(7,2) NOT NULL,
-  UNIQUE KEY `UX_PeriodRiser` (`PeriodId`,`RiserId`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+  UNIQUE KEY `UX_PeriodRiser` (`PeriodId`,`RiserId`),
+  CONSTRAINT `FK_RiserReading_Riser` FOREIGN KEY (`RiserId`)
+    REFERENCES `Riser` (`RiserId`)
+) ENGINE=INNODB DEFAULT CHARACTER SET=latin1;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
