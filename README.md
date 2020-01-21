@@ -45,5 +45,5 @@ The only other setting is done by direct editing of `KY` table in the database. 
 
 The database structure is defined in the `readings_db.sql` file.
 
-![Database structure](https://github.com/leobro98/readings/readings_db.png)
+![Database structure](https://github.com/leobro98/readings/blob/master/readings_db.png)
 
