@@ -30,38 +30,43 @@ function isPeriodFinished($kyCode, $year, $month, $connection) {
 }
 
 function getReadingCount($kyCode, $year, $month, $connection) {
-    $kyCount = mysqli_query($connection,
+    $countQuery = mysqli_query($connection,
         "SELECT COUNT(*) AS Readings FROM Reading " .
             "INNER JOIN Period ON Period.PeriodId = Reading.PeriodId " .
         "WHERE Period.KyCode = '$kyCode' " .
             "AND Period.Year = $year " .
             "AND Period.Month = $month");
-    if (!$kyCount)
+    if (!$countQuery)
         ReportInvalidQuery();
-    $readingCount = mysqli_result($kyCount, 0, 'Readings');
+    $readingCount = mysqli_result($countQuery, 0, 'Readings');
 
     return $readingCount;
 }
 
 function getErrorCount($kyCode, $year, $month, $connection) {
-    $kyCount = mysqli_query($connection, 
-        "SELECT COUNT(*) AS Readings FROM Reading " .
+    $countQuery = mysqli_query($connection, 
+        "SELECT COUNT(*) AS Errors FROM Reading " .
             "INNER JOIN Period ON Period.PeriodId = Reading.PeriodId " .
         "WHERE Period.KyCode = '$kyCode' " .
             "AND Period.Year = $year " .
             "AND Period.Month = $month " .
-            "AND (ColdKitchStart > ColdKitchEnd " .
-                "OR HotKitchStart > HotKitchEnd " .
-                "OR ColdBathStart > ColdBathEnd " .
-                "OR HotBathStart > HotBathEnd " .
-                "OR GasStart > GasEnd " .
+            "AND (ColdKitchStart IS NULL AND ColdKitchEnd IS NOT NULL " .
+                "OR ColdKitchStart > COALESCE(ColdKitchEnd, 0) " .
+                "OR HotKitchStart IS NULL AND HotKitchEnd IS NOT NULL " .
+                "OR HotKitchStart > COALESCE(HotKitchEnd, 0) " .
+                "OR ColdBathStart IS NULL AND ColdBathEnd IS NOT NULL " .
+                "OR ColdBathStart > COALESCE(ColdBathEnd, 0) " .
+                "OR HotBathStart IS NULL AND HotBathEnd IS NOT NULL " .
+                "OR HotBathStart > COALESCE(HotBathEnd, 0) " .
+                "OR GasStart IS NULL AND GasEnd IS NOT NULL " .
+                "OR GasStart > COALESCE(GasEnd, 0) " .
                 "OR People < 0 " .
             ")");
-    if (!$kyCount)
+    if (!$countQuery)
         ReportInvalidQuery();
-    $readingCount = mysqli_result($kyCount, 0, 'Readings');
+    $errorCount = mysqli_result($countQuery, 0, 'Errors');
 
-    return $readingCount;
+    return $errorCount;
 }
 
 DocHead('Administreerimine', 'readings.js');
