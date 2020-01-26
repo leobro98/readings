@@ -12,7 +12,7 @@ $connection = ConnectToDb();
 if (isset($_GET["period"]))
 	$periodId = htmlspecialchars($_GET['period']);
 else {
-	echo "Periood ei ole antud.<br />";
+	echo "Period is not set.<br />";
 	mysqli_close($connection);
 	exit();
 }
@@ -26,7 +26,7 @@ if (! $periodRow) {
     exit();
 }
 if (mysqli_num_rows($periodRow) == 0) {
-    echo 'Sellist perioodi ei ole.<br />';
+    echo 'The period does not exist.<br />';
     mysqli_close($connection);
     exit();
 }
@@ -43,7 +43,7 @@ if (! $newReadings) {
 	exit();
 }
 if (mysqli_num_rows($newReadings) == 0) {
-    echo 'Perioodil ei ole andmeid.<br />';
+    echo 'There is no data in the period.<br />';
 	mysqli_close($connection);
 	exit();
 }
@@ -73,7 +73,7 @@ else {
 	}
 	
     echo $ky . $separator . $year . $separator . $month . "\r\n";
-	echo 'PystikId' . $separator . 'Start' . $separator . "End\r\n";
+	echo 'RiserId' . $separator . 'Start' . $separator . "End\r\n";
 	
 	for ($i = 0; $i < mysqli_num_rows($newReadings); $i++) {
 		echo mysqli_result($newReadings, $i, 'RiserId') . $separator;
@@ -89,7 +89,7 @@ else {
 		echo "\r\n";
 	}
 	
-	// row for house general reader
+	// row for house main reader
 	$houseReadings = mysqli_query($connection, "SELECT * FROM HouseReading WHERE KyCode = '$ky' AND PeriodId = $periodId");
 	if (! $houseReadings) {
 		ReportInvalidQuery();
@@ -97,7 +97,7 @@ else {
 		exit();
 	}
 	if (mysqli_num_rows($houseReadings) > 0) {
-		echo 'maja' . $separator;
+		echo 'House' . $separator;
 		
 		if ($_GET['dec'] == 'est') {
 			echo Est(mysqli_result($houseReadings, 0, 'Start')) . $separator;

@@ -69,10 +69,10 @@ function getErrorCount($kyCode, $year, $month, $connection) {
     return $errorCount;
 }
 
-DocHead('Administreerimine', 'readings.js');
+DocHead('Administration', 'readings.js');
 ?>
 
-<h1>Administreerimine</h1>
+<h1>Administration</h1>
 
 <?php
 $connection = ConnectToDb();
@@ -87,17 +87,17 @@ if(! isset($_GET['ky'])) {
     $prevMonth = date('m', $prevMonthTime);
 ?>
 
-<h2>Vali korteri&uuml;histu</h2>
+<h2>Choose condominium</h2>
 
 <table border="0" cellspacing="3" align="center" id="ky">
   <tr>
-    <th>Kood</th>
-    <th>Nimetus</th>
-    <th>Lukus</th>
-    <th>Kortereid</th>
-    <th>Sisestatud <?=$prevMonth?></th>
-    <th>Vigu</th>
-    <th>Valmis</th>
+    <th>Code</th>
+    <th>Name</th>
+    <th>Locked</th>
+    <th>Flats</th>
+    <th>Entered <?=$prevMonth?></th>
+    <th>Errors</th>
+    <th>Ready</th>
   </tr>
 <?php
     for ($i = 0; $i < mysqli_num_rows($kys); $i++) {
@@ -191,8 +191,8 @@ else
 ?>
 
 <div id="params">
-    K&Uuml;: <?=$ky?>, <?=$flatCount?> korterit &nbsp;&nbsp;
-    <a href="<?=$_SERVER['PHP_SELF']?>">Vali teine &uuml;histu</a>
+    Condominium: <?=$ky?>, <?=$flatCount?> flats &nbsp;&nbsp;
+    <a href="<?=$_SERVER['PHP_SELF']?>">Choose another condominium</a>
 <?php
     $periods = mysqli_query($connection, 
         "SELECT * FROM (" .
@@ -214,15 +214,15 @@ else
 
 <table border="0" cellspacing="3" align="center" id="period">
   <tr>
-    <th>Aasta</th>
-    <th>Kuu</th>
-    <th>Lukk</th>
-    <th>Sisestatud</th>
-    <th>Vigu</th>
-    <th>Lae fail</th>
+    <th>Year</th>
+    <th>Month</th>
+    <th>Locked</th>
+    <th>Entered</th>
+    <th>Errors</th>
+    <th>Download</th>
 <?php
     if ($isRisers)
-        echo "    <th>Lae fail</th>\r\n";
+        echo "    <th>Download</th>\r\n";
 ?>
   </tr>
 <?php
@@ -251,14 +251,14 @@ else
         if ($isLocked)
             echo '<td colspan="2">&nbsp;</td>';
         else {
-            echo '<td ' . $errWarnClass . '>' . $errCount . ' vigu</td>';
-            echo '<td><a href="readings-down.php?ky=' . $ky . '&period=' . $periodId . '&dec=n">Korterid</a></td>';
+            echo '<td ' . $errWarnClass . '>' . $errCount . ' errors</td>';
+            echo '<td><a href="readings-down.php?ky=' . $ky . '&period=' . $periodId . '&dec=n">Flats</a></td>';
         }
         if ($isRisers) {
             if ($isLocked)
                 echo '<td>&nbsp;</td>';
             else
-                echo '<td><a href="risers-down.php?ky=' . $ky . '&period=' . $periodId . '&dec=n">P&uuml;stikud</a></td>';
+                echo '<td><a href="risers-down.php?ky=' . $ky . '&period=' . $periodId . '&dec=n">Risers</a></td>';
         }
         echo "\r\n  </tr>\r\n";
     }
@@ -276,7 +276,7 @@ else
 <br />
 
 <div id="buttons">
-    <input type="submit" value="Salvesta periood" />
+    <input type="submit" value="Save period" />
 </div>
 </form>
 

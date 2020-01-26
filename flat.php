@@ -37,28 +37,28 @@ if (mysqli_num_rows($flatReadings) == 0)
 else
 	$flatExists = true;
 
-DocHead("Korteri n&auml;idud - $kyName", 'readings.js');
+DocHead("Flat readings - $kyName", 'readings.js');
 $seeBottom = false;
 ?>
 
-<h1>Korteri n&auml;idud</h1>
+<h1>Flat readings</h1>
 <h2><?=$kyName?></h2>
 
 <div id="params">
-    <div style="margin-bottom: 7px">Korter: <?=$flatId?></div>
+    <div style="margin-bottom: 7px">Flat: <?=$flatId?></div>
     <form method="post" action="period.php">
         <input type="hidden" name="ky" value="<?=$ky?>" />
         <input type="hidden" name="password" value="<?=$password?>" />
 
 		<span class="scrn">
-			<input type="submit" value="Vali teine korter" />
+			<input type="submit" value="Choose another flat" />
 		</span>
     </form>
 <?php
     if (! $flatExists) {
 ?>
         <br /><br />
-        Sellist korteri andmeid ei ole salvestatud.
+        The flat is not saved.
 </div>
 <?php
         DocumentEnd('', $seeBottom);
@@ -71,85 +71,85 @@ $seeBottom = false;
 
 <table border="0" cellspacing="3" align="center" class="php">
     <tr>
-        <th rowspan="3">Aasta</th>
-        <th rowspan="3">Kuu</th>
+        <th rowspan="3">Year</th>
+        <th rowspan="3">Month</th>
 <?php
 $waterColumnCount = 0;
 
 if ($isKitch) {
 	if ($isKitchHot) {
-		echo '        <th colspan="4">K&ouml;&ouml;k</th>' . "\r\n";
+		echo '        <th colspan="4">Kitchen</th>' . "\r\n";
 		$waterColumnCount += 4;
 	} else {
-		echo '        <th colspan="2">K&ouml;&ouml;k</th>' . "\r\n";
+		echo '        <th colspan="2">Kitchen</th>' . "\r\n";
 		$waterColumnCount += 2;
 	}
 }
 if ($isBath) {
 	if ($isBathHot) {
-		echo '        <th colspan="4">Vannituba</th>' . "\r\n";
+		echo '        <th colspan="4">Bathroom</th>' . "\r\n";
 		$waterColumnCount += 4;
 	} else {
-		echo '        <th colspan="2">Vannituba</th>' . "\r\n";
+		echo '        <th colspan="2">Bathroom</th>' . "\r\n";
 		$waterColumnCount += 2;
 	}
 }
 if ($isKitch || $isBath) {
 	if ($isKitchHot || $isBathHot) {
-		echo '        <th colspan="2">Veekulu</th>' . "\r\n";
+		echo '        <th colspan="2">Water consump.</th>' . "\r\n";
 	} else {
-		echo '        <th>Veekulu</th>' . "\r\n";
+		echo '        <th>Water consump.</th>' . "\r\n";
 	}
 }
 if ($isGas) {
-	echo '        <th colspan="2" rowspan="2">Gaas</th>' . "\r\n";
-	echo '        <th rowspan="3">Gaasi<br />kulu</th>' . "\r\n";
+	echo '        <th colspan="2" rowspan="2">Gas</th>' . "\r\n";
+	echo '        <th rowspan="3">Gas<br />consump.</th>' . "\r\n";
 }
 if ($isPeople) {
-	echo '        <th rowspan="3">Elanike</th>' . "\r\n";
+	echo '        <th rowspan="3">People</th>' . "\r\n";
 }
 echo '        <th rowspan="3" class="button-cell"></th>' . "\r\n";
 echo "    </tr>\r\n";
 echo "    <tr>\r\n";
 if ($isKitch) {
-	echo '        <th colspan="2">K&uuml;lm vesi</th>' . "\r\n";
+	echo '        <th colspan="2">Cold water</th>' . "\r\n";
 	if ($isKitchHot) {
-		echo '        <th colspan="2">Soe vesi</th>' . "\r\n";
+		echo '        <th colspan="2">Hot water</th>' . "\r\n";
 	}
 }
 if ($isBath) {
-	echo '        <th colspan="2">K&uuml;lm vesi</th>' . "\r\n";
+	echo '        <th colspan="2">Cold water</th>' . "\r\n";
 	if ($isBathHot) {
-		echo '        <th colspan="2">Soe vesi</th>' . "\r\n";
+		echo '        <th colspan="2">Hot water</th>' . "\r\n";
 	}
 }
 if ($isKitch || $isBath) {
-	echo '        <th rowspan="2">Kokku</th>' . "\r\n";
+	echo '        <th rowspan="2">Total</th>' . "\r\n";
 	if ($isKitchHot || $isBathHot) {
-		echo '        <th rowspan="2">s.h. soe</th>' . "\r\n";
+		echo '        <th rowspan="2">Incl. hot</th>' . "\r\n";
 	}
 }
 echo "    </tr>\r\n";
 echo "    <tr>\r\n";
 if ($isKitch) {
-	echo "        <th>Algn&auml;it</th>\r\n";
-	echo "        <th>L&otilde;ppn&auml;it</th>\r\n";
+	echo "        <th>Start</th>\r\n";
+	echo "        <th>End</th>\r\n";
 	if ($isKitchHot) {
-		echo "        <th>Algn&auml;it</th>\r\n";
-		echo "        <th>L&otilde;ppn&auml;it</th>\r\n";
+		echo "        <th>Start</th>\r\n";
+		echo "        <th>End</th>\r\n";
 	}
 }
 if ($isBath) {
-	echo "        <th>Algn&auml;it</th>\r\n";
-	echo "        <th>L&otilde;ppn&auml;it</th>\r\n";
+	echo "        <th>Start</th>\r\n";
+	echo "        <th>End</th>\r\n";
 	if ($isBathHot) {
-		echo "        <th>Algn&auml;it</th>\r\n";
-		echo "        <th>L&otilde;ppn&auml;it</th>\r\n";
+		echo "        <th>Start</th>\r\n";
+		echo "        <th>End</th>\r\n";
 	}
 }
 if ($isGas) {
-	echo "        <th>Algn&auml;it</th>\r\n";
-	echo "        <th>L&otilde;ppn&auml;it</th>\r\n";
+	echo "        <th>Start</th>\r\n";
+	echo "        <th>End</th>\r\n";
 }
 echo "    </tr>\r\n";
 
@@ -233,8 +233,8 @@ $averageHot = round($totalHot / $readingsCount, 1);
 $averageGas = round($totalGas / $readingsCount, 1);
 $averagePeople = round($totalPeople / $readingsCount, 0);
 
-echo "    <tr id=\"kokku\">\r\n";
-echo "        <td colspan=\"$span\">Keskmine:</td>\r\n";
+echo "    <tr id=\"total\">\r\n";
+echo "        <td colspan=\"$span\">Average:</td>\r\n";
 if ($isKitch || $isBath) {
 	echo "        <td>$averageCold</td>\r\n";
 	if ($isKitchHot || $isBathHot) {

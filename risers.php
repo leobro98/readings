@@ -90,31 +90,31 @@ else {
     }
 }
 
-DocHead("N&auml;idud - $kyName", "readings.js");
+DocHead("Readings - $kyName", "readings.js");
 $seeBottom = false;
 ?>
 
-<h1>N&auml;idud</h1>
+<h1>Readings</h1>
 <h2><?=$kyName?></h2>
 
 <div id="params">
-    Aasta: <?=$year?>  &nbsp;&nbsp;
-    Kuu:   <?=$month?> &nbsp;&nbsp;
+    Year:  <?=$year?>  &nbsp;&nbsp;
+    Month: <?=$month?> &nbsp;&nbsp;
     <form method="post" action="period.php" id="formPeriod">
         <input type="hidden" name="ky" value="<?=$ky?>" />
         <input type="hidden" name="password" value="<?=$password?>" />
 
-        <input type="submit" value="Vali teine periood" /> &nbsp;&nbsp;
+        <input type="submit" value="Choose another period" /> &nbsp;&nbsp;
 		<span class="scrn">
-			<a href="risers-down.php?ky=<?=$ky?>&period=<?=$periodId?>">Lae alla (eng)</a> &nbsp;&nbsp;
-			<a href="risers-down.php?ky=<?=$ky?>&period=<?=$periodId?>&dec=est">Lae alla (est)</a>
+			<a href="risers-down.php?ky=<?=$ky?>&period=<?=$periodId?>">Download (eng)</a> &nbsp;&nbsp;
+			<a href="risers-down.php?ky=<?=$ky?>&period=<?=$periodId?>&dec=est">Download (est)</a>
 		</span>
     </form>
 <?php
     if (! $periodExists) {
 ?>
         <br /><br />
-        Sellist perioodi ei ole salvestatud.
+        The period is not yet created.
 </div>
 <?php
         DocumentEnd('', $seeBottom);
@@ -171,10 +171,10 @@ $seeBottom = false;
 
 <table border="0" cellspacing="3" align="center" class="php">
     <tr>
-        <th>P&uuml;stik</th>
-        <th>Algn&auml;it</th>
-        <th>L&otilde;ppn&auml;it</th>
-        <th>Kulu</th>
+        <th>Riser</th>
+        <th>Start</th>
+        <th>End</th>
+        <th>&nbsp;Consumption&nbsp;</th>
         <th id="edit"></th>
     </tr>
 <?php
@@ -220,7 +220,7 @@ $seeBottom = false;
 		if (! $locked && $filled) {
 			echo '        <td class="img">' . "\r\n";
 			echo '            <img src="edit.gif" onclick="makeEditable(' . $id
-					. ')" width="15" height="13" alt="Redigeeri" title="Redigeeri" />' . "\r\n";
+					. ')" width="15" height="13" alt="Edit" title="Edit" />' . "\r\n";
 			echo '        </td>' . "\r\n";
 		} else {
 			echo '        <td class="img"></td>' . "\r\n";
@@ -233,12 +233,12 @@ $seeBottom = false;
 <?php
     if ($filledCount < $riserCount) {
 ?>
-        <td><strong>Kokku <span class="scrn"><?=$filledCount?></span></strong></td>
+        <td><strong>Total <span class="scrn"><?=$filledCount?></span></strong></td>
         <script type="text/javascript" language="JavaScript">var warning = true;</script>
 <?php
     } else {
 ?>
-        <td>Kokku <span class="scrn"><?=$filledCount?></span></td>
+        <td>Total <span class="scrn"><?=$filledCount?></span></td>
 <?php
     }
 ?>
@@ -250,7 +250,7 @@ $seeBottom = false;
 		<td colspan="5">&nbsp;</td>
     </tr>
 	<tr id="house">
-		<td>Maja &uuml;ldveem&otilde;&otilde;tja</td>
+		<td>House main meter</td>
 <?php
 	$houseStart  = mysqli_result($houseReadings, 0, 'Start');
 	$houseEnd    = mysqli_result($houseReadings, 0, 'End');
@@ -274,7 +274,7 @@ $seeBottom = false;
 	if (! $locked && $filled) {
 		echo '        <td class="img">' . "\r\n";
 		echo '            <img src="edit.gif" onclick="makeEditable(' . "'house'"
-				. ')" width="15" height="13" alt="Redigeeri" title="Redigeeri" />' . "\r\n";
+				. ')" width="15" height="13" alt="Edit" title="Edit" />' . "\r\n";
 		echo '        </td>' . "\r\n";
 	} else {
 		echo '        <td class="img"></td>' . "\r\n";
@@ -288,7 +288,7 @@ $seeBottom = false;
 if (! $locked) {
 ?>
 <div id="buttons">
-    <input type="submit" value="Salvesta" />
+    <input type="submit" value="Save" />
 </div>
 <?php
 }

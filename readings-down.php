@@ -12,7 +12,7 @@ $connection = ConnectToDb();
 if (isset($_GET["period"]))
     $periodId = htmlspecialchars($_GET['period']);
 else {
-    echo "Periood ei ole antud.<br />";
+    echo "Period is not set.<br />";
     mysqli_close($connection);
     exit();
 }
@@ -26,7 +26,7 @@ if (! $periodRow) {
     exit();
 }
 if (mysqli_num_rows($periodRow) == 0) {
-    echo 'Sellist perioodi ei ole.<br />';
+    echo 'The period does not exist.<br />';
     mysqli_close($connection);
     exit();
 }
@@ -43,7 +43,7 @@ if (! $newReadings) {
     exit();
 }
 if (mysqli_num_rows($newReadings) == 0) {
-    echo 'Perioodil ei ole andmeid.<br />';
+    echo 'There is no data in the period.<br />';
     mysqli_close($connection);
     exit();
 }
@@ -59,10 +59,12 @@ else {
     ob_clean();
     flush();
 
+	$columnNames = "Flat;ColdKitchStart;ColdKitchEnd;HotKitchStart;HotKitchEnd;ColdBathStart;ColdBathEnd;HotBathStart;HotBathEnd;GasStart;GasEnd;ElectrStart;ElectrEnd;People\r\n";
+
     if (isset($_GET['dec']) && $_GET['dec'] == 'est') {
         echo "$ky;$year;$month\r\n";
         // Estonian decimal symbol and list separator
-        echo "Korter;KylmKookAlg;KylmKookLopp;SoeKookAlg;SoeKookLopp;KylmVannAlg;KylmVannLopp;SoeVannAlg;SoeVannLopp;GaasAlg;GaasLopp;ElekterAlg;ElekterLopp;Elanike\r\n";
+        echo $columnNames;
         
         for ($i = 0; $i < mysqli_num_rows($newReadings); $i++) {
             echo     mysqli_result($newReadings, $i, 'FlatId')          . ';';
@@ -89,7 +91,7 @@ else {
     else if ($_GET['dec'] == 'n') {
         echo "$ky;$year;$month\r\n";
         // English decimal symbol, but Estonian list separator - for Natalia
-        echo "Korter;KylmKookAlg;KylmKookLopp;SoeKookAlg;SoeKookLopp;KylmVannAlg;KylmVannLopp;SoeVannAlg;SoeVannLopp;GaasAlg;GaasLopp;ElekterAlg;ElekterLopp;Elanike\r\n";
+        echo $columnNames;
         
         for ($i = 0; $i < mysqli_num_rows($newReadings); $i++) {
             echo mysqli_result($newReadings, $i, 'FlatId')         . ';';
@@ -116,7 +118,7 @@ else {
     else {
         echo "$ky,$year,$month\r\n";
         // English settings
-        echo "Korter,KylmKookAlg,KylmKookLopp,SoeKookAlg,SoeKookLopp,KylmVannAlg,KylmVannLopp,SoeVannAlg,SoeVannLopp,GaasAlg,GaasLopp,ElekterAlg,ElekterLopp,Elanike\r\n";
+        echo $columnNames;
         
         for ($i = 0; $i < mysqli_num_rows($newReadings); $i++) {
             echo mysqli_result($newReadings, $i, 'FlatId')         . ',';

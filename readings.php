@@ -128,25 +128,25 @@ if (isset($_POST["periodId"])) {
     }
 }
 
-DocHead("N&auml;idud - $kyName", 'readings.js');
+DocHead("Readings - $kyName", 'readings.js');
 $seeBottom = false;
 ?>
 
-<h1>N&auml;idud</h1>
+<h1>Readings</h1>
 <h2><?=$kyName?></h2>
 
 <div id="params">
-    Aasta: <?=$year?>  &nbsp;&nbsp;
-    Kuu:   <?=$month?> &nbsp;&nbsp;
+    Year:  <?=$year?>  &nbsp;&nbsp;
+    Month: <?=$month?> &nbsp;&nbsp;
     <form method="post" action="period.php" id="formPeriod">
         <input type="hidden" name="ky" value="<?=$ky?>" />
         <input type="hidden" name="password" value="<?=$password?>" />
 
         <div style="margin-top: 10px">
-            <input type="submit" value="Vali teine periood" style="margin-right: 10px" />
+            <input type="submit" value="Choose another period" style="margin-right: 10px" />
             <span class="scrn">
-                <a href="readings-down.php?ky=<?=$ky?>&period=<?=$periodId?>">Lae alla (eng)</a> &nbsp;&nbsp;
-                <a href="readings-down.php?ky=<?=$ky?>&period=<?=$periodId?>&dec=est">Lae alla (est)</a>
+                <a href="readings-down.php?ky=<?=$ky?>&period=<?=$periodId?>">Download (eng)</a> &nbsp;&nbsp;
+                <a href="readings-down.php?ky=<?=$ky?>&period=<?=$periodId?>&dec=est">Download (est)</a>
             </span>
         </div>
     </form>
@@ -178,18 +178,18 @@ $seeBottom = false;
 
 <table border="0" cellspacing="3" align="center" class="php">
     <tr>
-        <th rowspan="3">Korter</th>
+        <th rowspan="3">Flat</th>
 <?php
     $waterColumnCount = 0;
     if ($isKitch) {
         if ($isKitchHot) {
 ?>
-        <th colspan="4">K&ouml;&ouml;k</th>
+        <th colspan="4">Kitchen</th>
 <?php
         $waterColumnCount += 4;
         } else {
 ?>
-        <th colspan="2">K&ouml;&ouml;k</th>
+        <th colspan="2">Kitchen</th>
 <?php
             $waterColumnCount += 2;
         }
@@ -197,12 +197,12 @@ $seeBottom = false;
     if ($isBath) {
         if ($isBathHot) {
 ?>
-        <th colspan="4">Vannituba</th>
+        <th colspan="4">Bathroom</th>
 <?php
         $waterColumnCount += 4;
         } else {
 ?>
-        <th colspan="2">Vannituba</th>
+        <th colspan="2">Bathroom</th>
 <?php
             $waterColumnCount += 2;
         }
@@ -210,23 +210,23 @@ $seeBottom = false;
     if ($isKitch || $isBath) {
         if ($isKitchHot || $isBathHot) {
 ?>
-        <th colspan="2">Veekulu</th>
+        <th colspan="2">Water consump.</th>
 <?php
         } else {
 ?>
-        <th>Veekulu</th>
+        <th>Water</th>
 <?php
         }
     }
     if ($isGas) {
 ?>
-        <th colspan="2" rowspan="2">Gaas</th>
-        <th rowspan="3">Gaasi<br />kulu</th>
+        <th colspan="2" rowspan="2">Gas</th>
+        <th rowspan="3">Gas<br />consump.</th>
 <?php
     }
     if ($isPeople) {
 ?>
-        <th rowspan="3">Elanike</th>
+        <th rowspan="3">People</th>
 <?php
     }
 ?>
@@ -236,31 +236,31 @@ $seeBottom = false;
 <?php
     if ($isKitch) {
 ?>
-        <th colspan="2">K&uuml;lm vesi</th>
+        <th colspan="2">Cold water</th>
 <?php
         if ($isKitchHot) {
 ?>
-        <th colspan="2">Soe vesi</th>
+        <th colspan="2">Hot water</th>
 <?php
         }
     }
     if ($isBath) {
 ?>
-        <th colspan="2">K&uuml;lm vesi</th>
+        <th colspan="2">Cold water</th>
 <?php
         if ($isBathHot) {
 ?>
-        <th colspan="2">Soe vesi</th>
+        <th colspan="2">Hot water</th>
 <?php
         }
     }
     if ($isKitch || $isBath) {
 ?>
-        <th rowspan="2">Kokku</th>
+        <th rowspan="2">Total</th>
 <?php
         if ($isKitchHot || $isBathHot) {
 ?>
-        <th rowspan="2">s.h. soe</th>
+        <th rowspan="2">Incl. hot</th>
 <?php
         }
     }
@@ -270,32 +270,32 @@ $seeBottom = false;
 <?php
     if ($isKitch) {
 ?>
-        <th>Algn&auml;it</th>
-        <th>L&otilde;ppn&auml;it</th>
+        <th>Start</th>
+        <th>End</th>
 <?php
         if ($isKitchHot) {
 ?>
-        <th>Algn&auml;it</th>
-        <th>L&otilde;ppn&auml;it</th>
+        <th>Start</th>
+        <th>End</th>
 <?php
         }
     }
     if ($isBath) {
 ?>
-        <th>Algn&auml;it</th>
-        <th>L&otilde;ppn&auml;it</th>
+        <th>Start</th>
+        <th>End</th>
 <?php
         if ($isBathHot) {
 ?>
-        <th>Algn&auml;it</th>
-        <th>L&otilde;ppn&auml;it</th>
+        <th>Start</th>
+        <th>End</th>
 <?php
         }
     }
     if ($isGas) {
 ?>
-        <th>Algn&auml;it</th>
-        <th>L&otilde;ppn&auml;it</th>
+        <th>Start</th>
+        <th>End</th>
 <?php
     }
 ?>
@@ -384,7 +384,7 @@ $seeBottom = false;
             $totalPeople += mysqli_result($newReadings, $i, 'People');
         }
         echo '<td class="button-cell"><img src="cut.gif" onclick="deleteRow(' . $curFlat .
-            ')" alt="kustuta" title="Kustuta rida" /></td>';
+            ')" alt="delete" title="Delete row" /></td>';
         echo "\r\n";
         echo "    </tr>\r\n";
     }
@@ -393,12 +393,12 @@ $seeBottom = false;
 <?php
     if ($flatsEntered < $flats) {
 ?>
-        <td><strong>Kokku <span class="scrn"><?=$flatsEntered?></span></strong></td>
+        <td><strong>Total <span class="scrn"><?=$flatsEntered?></span></strong></td>
         <script type="text/javascript" language="JavaScript">var warning = true;</script>
 <?php
     } else {
 ?>
-        <td>Kokku <span class="scrn"><?=$flatsEntered?></span></td>
+        <td>Total <span class="scrn"><?=$flatsEntered?></span></td>
 <?php
     }
     if ($isKitch || $isBath) {
@@ -531,7 +531,7 @@ $seeBottom = false;
 <?php
     }
 ?>
-        <td><a href="#" onclick="prefill()">T&auml;ida lahtrid</a></td>
+        <td><a href="#" onclick="prefill()">Fill data</a></td>
     </tr>
 <?php
 }
@@ -547,7 +547,7 @@ if ($locked) {
 } else {
 ?>
     <div id="buttons">
-        <input type="submit" value="Salvesta" />
+        <input type="submit" value="Save" />
     </div>
 </form>
 
@@ -556,7 +556,7 @@ if ($finished) {
 ?>
     <div id="message-box-outer">
         <div id="message-box-inner">
-            <span id="message-label">Teatatud: Andmed on valmis</span>
+            <span id="message-label">Reported: Data are ready</span>
         </div>
     </div>
 <?php
@@ -572,8 +572,8 @@ if ($finished) {
 
         <div id="message-box-outer">
             <div id="message-box-inner">
-                <span id="message-label">Teavita raamatupidajat:</span>
-                <button type="submit" id="message-button">Andmed on valmis</button>
+                <span id="message-label">Report to accountant:</span>
+                <button type="submit" id="message-button">Data are ready</button>
             </div>
         </div>
     </form>
@@ -582,13 +582,13 @@ if ($finished) {
 ?>
 
 <div id="comments">
-    <p>M&auml;rkused:</p>
+    <p>Notes:</p>
     <ol style="padding-left: 20px">
-        <li>Te saate sisestada kortereid suvalises j&auml;rjekorras (vt. ka p.3).</li>
-        <li>Kui soovite muuta juba salvestatud korteri n&auml;iteid, sisestage korteri number ja 
-            &otilde;iged n&auml;idud (vt. ka p.3).</li>
-        <li>Kui soovite eelt&auml;ita lahtreid juba salvestatud andmetega, sisestage korteri number
-            ja vajutage "T&auml;ida lahtrid".</li>
+        <li>You can enter flats in arbitrary order (see also note 3).</li>
+        <li>If you want to change already saved flat readings, enter the flat number and 
+            correct readings (see also note 3).</li>
+        <li>If you want to pre-fill fields with already saved data, enter the flat number
+            and click "Fill data".</li>
     </ol>
 </div>
 

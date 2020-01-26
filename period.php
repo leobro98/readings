@@ -23,22 +23,22 @@ else {
 DocHead("Readings - $kyName", "readings.js");
 ?>
 
-<h1>N&auml;idud</h1>
+<h1>Period</h1>
 <h2><?=$kyName?></h2>
 
 <form method="post" action="readings.php">
     <div id="params">
-        Aasta: <input type="text" name="year"  value="<?=$year?>" /> &nbsp;&nbsp;
-        Kuu:   <input type="text" name="month" value="<?=$month?>" id="month" />
+        Year:  <input type="text" name="year"  value="<?=$year?>" /> &nbsp;&nbsp;
+        Month: <input type="text" name="month" value="<?=$month?>" id="month" />
     </div>
     <br />
 
     <div id="buttons">
-        <input type="submit" value="Ava n&auml;idud" />
+        <input type="submit" value="Open readings" />
 <?php
 if ($hasRisers) {
 ?>
-        <input type="button" value="Ava p&uuml;stikud" onclick="openPage('risers.php');" />
+        <input type="button" value="Open risers" onclick="openPage('risers.php');" />
 <?php
 }
 ?>
@@ -52,9 +52,9 @@ if ($hasRisers) {
 	<div class="space-top">
 		<table border="0" cellspacing="3" align="center">
 			<tr>
-                <td>Korter:</td>
+                <td>Flat:</td>
 				<td><input type="text" name="flatId" id="flatId" /><td>
-				<td><a href="javascript:void(0)" onclick="return openFlat();">Vaata korteri statistika</a><td>
+				<td><a href="javascript:void(0)" onclick="return openFlat();">View flat statistics</a><td>
 			</tr>
 		</table>
 

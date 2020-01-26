@@ -1,6 +1,6 @@
 function OnUnload() {
     if (warning)
-        alert('Mitte kõik näidud on sisestatud!');
+        alert('Not all data are entered!');
 }
 
 function setNoWarning() {
@@ -19,7 +19,7 @@ function openFlat() {
 	if (flat && flat.value && flat.value.length > 0)
 		frm.submit();
 	else {
-		alert ('Korter ei ole sisestatud!');
+		alert ('The flat number is not entered!');
 		return false;
 	}
 }
