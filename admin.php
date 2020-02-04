@@ -106,9 +106,9 @@ if(! isset($_GET['ky'])) {
         $href = $_SERVER['PHP_SELF'] . '?ky=' . $kyCode;
         $locked = isPeriodLocked($kyCode, $prevYear, $prevMonth, $connection);
         $lock = $locked ? 'v' : '';
-        $finished = isPeriodFinished($kyCode, $prevYear, $prevMonth, $connection);
-        $finish = $finished ? '+' : '';
-        if (!$locked && $finished)
+        $isFinished = isPeriodFinished($kyCode, $prevYear, $prevMonth, $connection);
+        $finishMark = $isFinished ? '+' : '';
+        if (!$locked && $isFinished)
             $todoClass = 'todo';
         else
             $todoClass = '';
@@ -136,7 +136,7 @@ if(! isset($_GET['ky'])) {
         echo '    <td class="result">'                         . $flatCount    . "</td>\r\n";
         echo '    <td class="result '  . $flatWarnClass . '">' . $readingCount . "</td>\r\n";
         echo '    <td class="result '  . $errWarnClass  . '">' . $errors       . "</td>\r\n";
-        echo '    <td class="result">'                         . $finish       . "</td>\r\n";
+        echo '    <td class="result">'                         . $finishMark       . "</td>\r\n";
         echo "  </tr>\r\n";
     }
 ?>
