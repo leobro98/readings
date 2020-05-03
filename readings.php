@@ -153,7 +153,7 @@ $seeBottom = false;
 <?php
     if (! $periodExists) {
         echo "        <br /><br />\r\n";
-        echo "        Sellist perioodi ei ole salvestatud.\r\n";
+        echo "        This period is not created.\r\n";
         echo "</div>\r\n";
         DocumentEnd('', $seeBottom);
         mysqli_close($connection);
