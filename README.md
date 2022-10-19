@@ -2,7 +2,7 @@
 
 This is an aplication for on-line handover of some numeric data from multiple users to one administrator via a server-side database. It also stores the data and allows to access them later.
 
-The application was made as a hobby project but has been used as a work tool in one estonian accounting company during several years. Its demo version can be tried on the address http://vps32651nl.hyperhost.name:8080/readings/.
+The application was made as a hobby project, but has been used as a work tool in one estonian accounting company during several years. Its demo version can be tried on the address http://vps32651nl.hyperhost.name:8080/readings/.
 
 In order to explain the aim and the business logic of the application the explanations should be given to the tradition of utility fees calculation in Estonia.
 
